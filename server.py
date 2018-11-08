@@ -5,11 +5,18 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Rating, BobaShop, connect_to_db, db
 
+# from flask_googlemaps import GoogleMaps
+import googlemaps
+
 from pprint import pformat
 import os
 import json
 
+key = os.getenv("GOOGLE_PLACES_KEY")
+print('key: ', key)
+
 app = Flask(__name__)
+
 
 app.secret_key = "wiggles"
 
@@ -23,30 +30,12 @@ def index():
 
 @app.route("/boba_map")
 def find_bobashops():
-    """Search for Boba Shops from Google Places API"""
-    #for mvp this will just be a list of bobashops
+    """Search for Boba Shops from Google Places nearbysearch & display list of shops"""
 
-    query = request.args.get('query')
-    location = request.args.get('location')
-
-
-    return render_template("boba_map.html")
-
-@app.route('/bobashops', methods=['POST'])
-def generate_boba_map():
-    """Create a map with bobashops displayed using form data"""
-
-    url = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + GOOGLE_PLACES_KEY
-    response = requests.get(url, payload)
-    print(response)
-
-    data = response.json()
-    bobastores = []
+ #for now will just render map of current location
+    return render_template("boba_map.html", key=os.getenv("GOOGLE_PLACES_KEY"))
 
 
-    return render_template('bobashop_list.html',
-                            data=pformat(data),
-                            results=bobastores)
 
 
 @app.route("/registration_form", methods=["GET", "POST"])
