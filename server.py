@@ -5,7 +5,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Rating, BobaShop, connect_to_db, db
 
-# from flask_googlemaps import GoogleMaps
 import googlemaps
 
 from pprint import pformat

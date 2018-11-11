@@ -4,11 +4,21 @@
 {% block content %}
 
 <script type="text/javascript" src="static/gmaps.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <div id="map"></div>
+<div>
+  <p>
+    Here's the Boba Shops Near You!
+  </p>
+</div>
+
+
+<div id="boba-shop-results" class="well col-md-6 col-xs-12">
+ </div>
+<!-- API call that includes google library places and initializes map -->
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key={{ key }}&libraries=places&callback=initMap">
 </script>
 
 {% endblock %}
