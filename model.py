@@ -13,8 +13,9 @@ class BobaShop(db.Model):
     address = db.Column(db.String(100), nullable=False)
     latitude = db.Column(db.Integer, nullable=False)
     longitude = db.Column(db.Integer, nullable=False)
-    rating = db.Column(db.Integer)
-
+    # Is this representing the total average rating for BobaShop? It doesn't look like you need this
+    # because you have created this relationship on the Rating model.
+    # rating = db.Column(db.Integer)
 
 
 class User(db.Model):
@@ -28,13 +29,14 @@ class User(db.Model):
 
 #In later sprint make an owner class
 
+
 class Rating(db.Model):
     """Rating of boba shop website."""
 
     __tablename__ = "ratings"
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    boba_shop_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
+    boba_shop_id = db.Column(db.Integer, db.ForeignKey('bobashops.shop_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     score = db.Column(db.Integer)
 
